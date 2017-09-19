@@ -52,9 +52,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExcelDna.Integration, Version=0.29.5098.40039, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ExcelDna.Integration, Version=0.33.5716.39034, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\ExcelDna.Integration.dll</HintPath>
+      <HintPath>..\SSAddin\src\Packages\ExcelDna.Integration.0.34.6\lib\ExcelDna.Integration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

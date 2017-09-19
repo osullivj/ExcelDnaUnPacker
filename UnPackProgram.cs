@@ -40,6 +40,7 @@ The Excel-Dna integration assembly (ExcelDna.Integration.dll) is searched for
 		{
             // Force jit-load of ExcelDna.Integration assembly
             int unused = XlCall.xlAbort;
+            string lzmaName = null;
 
             if (args.Length < 1)
             {
@@ -79,6 +80,9 @@ The Excel-Dna integration assembly (ExcelDna.Integration.dll) is searched for
                     {
                         overwrite = true;
                     }
+                    else if (args[i].ToUpper( ) == "/R") {
+                        lzmaName = args[i+1];
+                    }
                 }
             }
 
@@ -107,8 +111,9 @@ The Excel-Dna integration assembly (ExcelDna.Integration.dll) is searched for
             }
 
             // Look inside an XLL with PEView. Each dll is packed in SECTION .rsrc as ASSEMBLY_LZMA <name> where name is the
-            // DLL name without .dll suffix
-            string lzmaName = dllOutputPath.Substring( 0, dllOutputPath.Length - 4);
+            // DLL name without .dll suffix. Or you can specify <name> with the /R command line option.
+            if ( lzmaName == null)
+                lzmaName = dllOutputPath.Substring( 0, dllOutputPath.Length - 4);
             Console.WriteLine( "Unpacking " + lzmaName );
             var hModule = ResourceHelper.LoadLibraryEx(xllPath, IntPtr.Zero, LoadLibraryFlags.LOAD_LIBRARY_AS_DATAFILE | LoadLibraryFlags.LOAD_LIBRARY_AS_IMAGE_RESOURCE);
             var content = ResourceHelper.LoadResourceBytes( hModule, "ASSEMBLY_LZMA", lzmaName);
